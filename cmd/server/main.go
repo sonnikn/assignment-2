@@ -1,7 +1,6 @@
 package main
 
 import (
-	"assignment-2/internal/database"
 	"log"
 	"net/http"
 	"os"
