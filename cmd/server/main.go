@@ -1,7 +1,7 @@
 package main
 
 import (
-	"envdash/internal/database"
+	"assignment-2/internal/database"
 	"log"
 	"net/http"
 	"os"
@@ -37,23 +37,23 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Registrations endpoints
-	mux.HandleFunc("POST /envdash/v1/registrations/", handlePostRegistration)
-	mux.HandleFunc("GET /envdash/v1/registrations/{id}", handleGetRegistration)
-	mux.HandleFunc("GET /envdash/v1/registrations/", handleGetAllRegistrations)
-	mux.HandleFunc("PUT /envdash/v1/registrations/{id}", handlePutRegistration)
-	mux.HandleFunc("DELETE /envdash/v1/registrations/{id}", handleDeleteRegistration)
+	mux.HandleFunc("POST /assignment-2/v1/registrations/", handlePostRegistration)
+	mux.HandleFunc("GET /assignment-2/v1/registrations/{id}", handleGetRegistration)
+	mux.HandleFunc("GET /assignment-2/v1/registrations/", handleGetAllRegistrations)
+	mux.HandleFunc("PUT /assignment-2/v1/registrations/{id}", handlePutRegistration)
+	mux.HandleFunc("DELETE /assignment-2/v1/registrations/{id}", handleDeleteRegistration)
 
 	// Dashboards endpoint
-	mux.HandleFunc("GET /envdash/v1/dashboards/{id}", handleGetDashboard)
+	mux.HandleFunc("GET /assignment-2/v1/dashboards/{id}", handleGetDashboard)
 
 	// Notifications endpoints
-	mux.HandleFunc("POST /envdash/v1/notifications/", handlePostNotification)
-	mux.HandleFunc("GET /envdash/v1/notifications/{id}", handleGetNotification)
-	mux.HandleFunc("GET /envdash/v1/notifications/", handleGetAllNotifications)
-	mux.HandleFunc("DELETE /envdash/v1/notifications/{id}", handleDeleteNotification)
+	mux.HandleFunc("POST /assignment-2/v1/notifications/", handlePostNotification)
+	mux.HandleFunc("GET /assignment-2/v1/notifications/{id}", handleGetNotification)
+	mux.HandleFunc("GET /assignment-2/v1/notifications/", handleGetAllNotifications)
+	mux.HandleFunc("DELETE /assignment-2/v1/notifications/{id}", handleDeleteNotification)
 
 	// Status endpoint
-	mux.HandleFunc("GET /envdash/v1/status/", handleGetStatus)
+	mux.HandleFunc("GET /assignment-2/v1/status/", handleGetStatus)
 
 	log.Printf("Starter server på port %s", port)
 	err := http.ListenAndServe(":"+port, mux)
