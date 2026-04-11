@@ -1,6 +1,6 @@
 package models
 
-// RegistrationRequest representerer innholdet fra en POST/PUT forespørsel[cite: 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85].
+// RegistrationRequest representerer innholdet fra en POST/PUT forespørsel
 type Registration struct {
 	ID               string       `json:"id" firestore:"id"`
 	Country          string       `json:"country,omitempty" firestore:"country,omitempty"`
