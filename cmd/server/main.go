@@ -1,9 +1,14 @@
 package main
 
 import (
+	"envdash/internal/database"
 	"log"
 	"net/http"
 	"os"
+
+	"assignment-2/internal/api"
+	"assignment-2/internal/database"
+	"assignment-2/internal/models"
 )
 
 func main() {
@@ -13,10 +18,22 @@ func main() {
 		port = "8080"
 	}
 
-	// 2. Initialiser Firebase Firestore (Dette bør implementeres i internal/database)
-	// dbClient := database.InitFirestore()
+	// 2. START DATABASEN:
+	// Vi kaller funksjonen vi lagde i firebaseinit.go
+	client, err := database.GetFirebaseClient()
+	if err != nil {
+		log.Fatalf("Klarte ikke starte Firebase: %v", err) // Avslutter programmet hvis DB feiler
+	}
+	// defer sørger for at forbindelsen til databasen lukkes pent når serveren (main) skrus av.
+	defer client.Close()
 
-	// 3. Sett opp ruting ved hjelp av standardbiblioteket
+	// 3. SETT OPP HANDLER (Dependency Injection):
+	// Vi gir databaseklienten vår til Handleren. Nå har alle rute-funksjonene tilgang til DB!
+	h := &api.Handler{
+		DB: client,
+	}
+
+	// 4. Sett opp ruting ved hjelp av standardbiblioteket
 	mux := http.NewServeMux()
 
 	// Registrations endpoints
@@ -46,9 +63,7 @@ func main() {
 }
 
 // Dummy handlers (Disse bør ligge i internal/api)
-func handlePostRegistration(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusCreated)
-}
+
 func handleGetRegistration(w http.ResponseWriter, r *http.Request)     {}
 func handleGetAllRegistrations(w http.ResponseWriter, r *http.Request) {}
 func handlePutRegistration(w http.ResponseWriter, r *http.Request)     {}
