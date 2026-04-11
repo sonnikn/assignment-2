@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"assignment2/internal/models" // Husk å bytte ut "assignment2" med det vi kalte prosjektet i go.mod
+	"assignment-2/internal/models" // Husk å bytte ut "assignment2" med det vi kalte prosjektet i go.mod
 )
 
 // HandlePostRegistration håndterer POST /envdash/v1/registrations/
